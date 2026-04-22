@@ -37,7 +37,7 @@
 }
 
 .cover .subtitle {
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-family: Allura;
     color: var(--alt-color);
     margin-top: 1.5rem
@@ -1374,7 +1374,7 @@ body {
 }
 
 h2 {
-    font-size: 2.3rem;
+    font-size: 3rem;
     color: var(--theme-color);
     font-weight: 400
 }
