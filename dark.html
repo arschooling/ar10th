@@ -243,6 +243,32 @@
     .invite{animation:none;}
     h1 .accent{animation:none;}
   }
+
+  @media (max-width: 860px){
+    .card{width:100%;}
+    .inner{padding:44px 28px 44px;}
+    .frame{inset:16px;}
+    .corner.tl{top:10px;left:10px;}
+    .corner.tr{top:10px;right:10px;}
+    .corner.bl{bottom:10px;left:10px;}
+    .corner.br{bottom:10px;right:10px;}
+  }
+  @media (max-width: 520px){
+    .inner{padding:36px 20px 36px;}
+    .hero{flex-direction:column;gap:16px;margin-bottom:24px;}
+    .hero .vbar{width:80px;height:1px;
+      background:linear-gradient(90deg,transparent,rgba(227,189,110,.45) 16%,rgba(227,189,110,.45) 84%,transparent);}
+    .hero .seal{height:120px;}
+    .hero .wordblock{align-items:center;}
+    .wordmark{font-size:28px;}
+    .invite{font-size:24px;text-align:center;}
+    h1{font-size:26px;}
+    .greet{font-size:15px;}
+    .details{padding:10px 16px;}
+    .row .val{font-size:16px;}
+    .contact .num{font-size:19px;}
+    .closing{font-size:15px;}
+  }
 </style>
 </head>
 <body>
