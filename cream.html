@@ -170,10 +170,16 @@
   .row .val .big{font-family:'Nanum Myeongjo',serif;font-weight:800;}
   .row .sub{color:var(--muted);font-size:14.5px;font-weight:300;line-height:1.75;margin-top:6px;}
   .row .sub .em{color:var(--gold-bright);font-weight:400;}
-  .map-links{display:flex;gap:6px;margin-top:10px;}
-  .map-btn{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:400;letter-spacing:.03em;text-decoration:none;color:var(--gold);border:1px solid var(--gold);opacity:.75;transition:opacity .2s;}
-  .map-btn:hover{opacity:1;}
-  .map-btn svg{width:11px;height:11px;}
+  .map-trigger{cursor:pointer;text-decoration:underline;text-underline-offset:3px;text-decoration-style:dotted;}
+  .map-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:100;align-items:center;justify-content:center;}
+  .map-overlay.on{display:flex;}
+  .map-popup{background:var(--paper);border-radius:14px;padding:24px 20px 20px;width:260px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.18);}
+  .map-popup p{font-size:13px;color:var(--muted);letter-spacing:.02em;margin-bottom:16px;}
+  .map-popup .map-choices{display:flex;flex-direction:column;gap:8px;}
+  .map-popup .map-choice{display:block;padding:10px 0;border-radius:8px;font-size:14px;font-weight:400;letter-spacing:.03em;text-decoration:none;color:var(--gold);border:1px solid var(--gold);opacity:.85;transition:opacity .2s;}
+  .map-popup .map-choice:hover{opacity:1;}
+  .map-popup .map-cancel{margin-top:12px;font-size:12.5px;color:var(--muted);cursor:pointer;letter-spacing:.03em;opacity:.7;}
+  .map-popup .map-cancel:hover{opacity:1;}
 
   .contact{
     margin-top:30px;text-align:center;
@@ -338,21 +344,7 @@
           <div class="body">
             <div class="label">식사 안내</div>
             <div class="val" style="font-size:16px;font-weight:400;line-height:1.7;">행사 중에는 <span style="color:var(--gold-bright)">다과</span>가 제공됩니다.</div>
-            <div class="sub">행사 후 식당 <span class="em">(쭈꾸미소)</span>으로 이동하여<br>함께 저녁식사 자리를 가질 예정입니다.</div>
-            <div class="map-links">
-              <a class="map-btn" href="https://map.naver.com/v5/search/경기 광주시 퇴촌면 정영로 756" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24" fill="none"><path d="M12.7 11.02 8 3H5v18h6.3v-8.02L16 21h3V3h-6.3v8.02z" fill="currentColor"/></svg>
-                네이버
-              </a>
-              <a class="map-btn" href="https://map.kakao.com/?q=경기 광주시 퇴촌면 정영로 756" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24" fill="none"><path d="M12 3C7.03 3 3 6.36 3 10.5c0 2.67 1.63 5.01 4.1 6.38L6 21l4.35-2.9c.53.07 1.08.1 1.65.1 4.97 0 9-3.36 9-7.5S16.97 3 12 3z" fill="currentColor"/></svg>
-                카카오
-              </a>
-              <a class="map-btn" href="https://maps.google.com/?q=경기+광주시+퇴촌면+정영로+756" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/></svg>
-                구글
-              </a>
-            </div>
+            <div class="sub">행사 후 식당 <span class="em map-trigger" onclick="document.getElementById('mapPopup').classList.add('on')">(쭈꾸미소)</span>으로 이동하여<br>함께 저녁식사 자리를 가질 예정입니다.</div>
           </div>
         </div>
       </div>
@@ -399,5 +391,17 @@
       els.forEach(function(el){ io.observe(el); });
     })();
   </script>
+
+  <div class="map-overlay" id="mapPopup" onclick="if(event.target===this)this.classList.remove('on')">
+    <div class="map-popup">
+      <p>지도 앱을 선택해주세요</p>
+      <div class="map-choices">
+        <a class="map-choice" href="https://map.naver.com/v5/search/경기 광주시 퇴촌면 정영로 756" target="_blank" rel="noopener" onclick="document.getElementById('mapPopup').classList.remove('on')">네이버 지도</a>
+        <a class="map-choice" href="https://map.kakao.com/?q=경기 광주시 퇴촌면 정영로 756" target="_blank" rel="noopener" onclick="document.getElementById('mapPopup').classList.remove('on')">카카오맵</a>
+        <a class="map-choice" href="https://maps.google.com/?q=경기+광주시+퇴촌면+정영로+756" target="_blank" rel="noopener" onclick="document.getElementById('mapPopup').classList.remove('on')">구글 지도</a>
+      </div>
+      <div class="map-cancel" onclick="document.getElementById('mapPopup').classList.remove('on')">닫기</div>
+    </div>
+  </div>
 </body>
 </html>
